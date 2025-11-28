@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje de Gratitud</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .image-container {
+            margin-bottom: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .person-image {
+            width: 250px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 5px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Textos */
+        .message {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .shipibo-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #FFD700;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .english-text {
+            font-size: 2em;
+            color: #fff;
+            font-style: italic;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+            50% { text-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+        }
+
+        /* Estrellas */
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        .star.gold {
+            background: #FFD700;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="SHIPIBO.png" alt="Persona Shipibo" class="person-image">
+        </div>
+        
+        <div class="message">
+            <div class="shipibo-text">¡Ichaviris irake jatibi matobo!</div>
+            <div class="english-text">Thank you all very much</div>
+        </div>
+    </div>
+
+    <script>
+        // Crear estrellas
+        function createStars() {
+            const numStars = 100;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = Math.random() > 0.5 ? 'star' : 'star gold';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        // Crear estrellas que caen
+        function createFallingStars() {
+            setInterval(() => {
+                const star = document.createElement('div');
+                star.className = Math.random() > 0.5 ? 'star' : 'star gold';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = '-10px';
+                star.style.width = (Math.random() * 4 + 2) + 'px';
+                star.style.height = star.style.width;
+                star.style.animation = `fall ${Math.random() * 3 + 3}s linear`;
+                document.body.appendChild(star);
+
+                setTimeout(() => {
+                    star.remove();
+                }, 6000);
+            }, 200);
+        }
+
+        createStars();
+        createFallingStars();
+    </script>
+</body>
+</html>
